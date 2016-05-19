@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2016 a las 23:44:53
+-- Tiempo de generación: 19-05-2016 a las 23:39:18
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -94,18 +94,39 @@ CREATE TABLE `tbl_ofertas` (
   `nombre_encargado` varchar(100) NOT NULL,
   `telefono_encargado` int(11) NOT NULL,
   `email_encargado` varchar(100) NOT NULL,
-  `tbl_categoria_id` int(11) NOT NULL,
-  `tbl_empresa_id` int(11) NOT NULL
+  `tbl_categoria_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
 
 --
 -- Volcado de datos para la tabla `tbl_ofertas`
 --
 
-INSERT INTO `tbl_ofertas` (`id`, `nombre`, `descripcion`, `nombre_imagen`, `fecha_creacion`, `estado_activa`, `fecha_inicio`, `fecha_fin`, `duracion_dias`, `nombre_encargado`, `telefono_encargado`, `email_encargado`, `tbl_categoria_id`, `tbl_empresa_id`) VALUES
-(3, 'Pollos 2X1', 'Por la compra de un pollito llevese otro muy gratis', 'Comidas.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Marco Antionio Echeverri', 75866666, 'eldaiblo@hotmail.com', 1, 1),
-(4, '40% de Descuento', 'descuento en todas las poleras hasta un 40%', 'Poleras.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Axel Rose', 76685968, 'gunsandroses@hotmail.com', 2, 1),
-(5, 'Consulta gratis!', 'consulta gratis en cualquiera de nuestras sucursales', 'Consultas.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Salama Hayek', 75584745, 'salmahayek@hotmail.com', 2, 1);
+INSERT INTO `tbl_ofertas` (`id`, `nombre`, `descripcion`, `nombre_imagen`, `fecha_creacion`, `estado_activa`, `fecha_inicio`, `fecha_fin`, `duracion_dias`, `nombre_encargado`, `telefono_encargado`, `email_encargado`, `tbl_categoria_id`) VALUES
+(3, 'Pollos 2X1', 'Por la compra de un pollito llevese otro muy gratis', 'Comidas.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Marco Antionio Echeverri', 75866666, 'eldaiblo@hotmail.com', 1),
+(4, '40% de Descuento', 'descuento en todas las poleras hasta un 40%', 'Poleras.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Axel Rose', 76685968, 'gunsandroses@hotmail.com', 2),
+(5, 'Consulta gratis!', 'consulta gratis en cualquiera de nuestras sucursales', 'Consultas.jpg', '2016-05-18', 1, '2016-05-18', '2016-06-18', 30, 'Salama Hayek', 75584745, 'salmahayek@hotmail.com', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_ofertas_tbl_sucursales`
+--
+
+CREATE TABLE `tbl_ofertas_tbl_sucursales` (
+  `id` int(11) NOT NULL,
+  `tbl_oferta_id` int(11) NOT NULL,
+  `tbl_sucursale_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=ascii;
+
+--
+-- Volcado de datos para la tabla `tbl_ofertas_tbl_sucursales`
+--
+
+INSERT INTO `tbl_ofertas_tbl_sucursales` (`id`, `tbl_oferta_id`, `tbl_sucursale_id`) VALUES
+(2, 3, 1),
+(3, 5, 1),
+(4, 4, 1),
+(5, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -125,6 +146,14 @@ CREATE TABLE `tbl_sucursales` (
   `estado_activa` tinyint(1) NOT NULL,
   `tbl_empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
+
+--
+-- Volcado de datos para la tabla `tbl_sucursales`
+--
+
+INSERT INTO `tbl_sucursales` (`id`, `nombre`, `direccion`, `telefono1`, `telefono2`, `posX`, `posY`, `fecha_creacion`, `estado_activa`, `tbl_empresa_id`) VALUES
+(1, '1er Anillo', '1er Anillo y Santos Dumont', 3264578, 3215478, 0, 0, '2016-05-19', 1, 1),
+(2, 'La barranca', '2do Anillo a 3 cuadras de los Bomberos', 7849865, 3562145, 0, 0, '2016-05-28', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -154,8 +183,15 @@ ALTER TABLE `tbl_imageofertas`
 --
 ALTER TABLE `tbl_ofertas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tbl_categoria_id` (`tbl_categoria_id`),
-  ADD KEY `tbl_empresa_id` (`tbl_empresa_id`);
+  ADD KEY `tbl_categoria_id` (`tbl_categoria_id`);
+
+--
+-- Indices de la tabla `tbl_ofertas_tbl_sucursales`
+--
+ALTER TABLE `tbl_ofertas_tbl_sucursales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_oferta_id` (`tbl_oferta_id`),
+  ADD KEY `tbl_sucursale_id` (`tbl_sucursale_id`);
 
 --
 -- Indices de la tabla `tbl_sucursales`
@@ -189,10 +225,15 @@ ALTER TABLE `tbl_imageofertas`
 ALTER TABLE `tbl_ofertas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT de la tabla `tbl_ofertas_tbl_sucursales`
+--
+ALTER TABLE `tbl_ofertas_tbl_sucursales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT de la tabla `tbl_sucursales`
 --
 ALTER TABLE `tbl_sucursales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
@@ -207,8 +248,14 @@ ALTER TABLE `tbl_imageofertas`
 -- Filtros para la tabla `tbl_ofertas`
 --
 ALTER TABLE `tbl_ofertas`
-  ADD CONSTRAINT `tbl_ofertas_ibfk_1` FOREIGN KEY (`tbl_categoria_id`) REFERENCES `tbl_categorias` (`id`),
-  ADD CONSTRAINT `tbl_ofertas_ibfk_2` FOREIGN KEY (`tbl_empresa_id`) REFERENCES `tbl_empresas` (`id`);
+  ADD CONSTRAINT `tbl_ofertas_ibfk_1` FOREIGN KEY (`tbl_categoria_id`) REFERENCES `tbl_categorias` (`id`);
+
+--
+-- Filtros para la tabla `tbl_ofertas_tbl_sucursales`
+--
+ALTER TABLE `tbl_ofertas_tbl_sucursales`
+  ADD CONSTRAINT `tbl_ofertas_tbl_sucursales_ibfk_1` FOREIGN KEY (`tbl_oferta_id`) REFERENCES `tbl_ofertas` (`id`),
+  ADD CONSTRAINT `tbl_ofertas_tbl_sucursales_ibfk_2` FOREIGN KEY (`tbl_sucursale_id`) REFERENCES `tbl_sucursales` (`id`);
 
 --
 -- Filtros para la tabla `tbl_sucursales`

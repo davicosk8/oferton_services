@@ -1,13 +1,15 @@
 <?php
 include 'config.php';
-
-$sql = "select	o.id as ofertaid, 
+ 
+$sql = "select distinct	o.id as ofertaid, 
 				o.nombre as ofertanombre, 
-        		o.descripcion as ofertadescripcion,
-        		o.nombre_imagen as ofertaimagen, 
-        		e.nombre as empresanombre 
-		from tbl_ofertas o 
-		inner join tbl_empresas e on o.tbl_empresa_id=e.id 
+		        o.nombre_imagen as ofertaimagen, 
+		        date_format(o.fecha_fin,'%W %d of %b - %Y') as ofertafechafin,
+		        e.nombre as empresanombre,
+		        e.id as empresaid from tbl_ofertas o
+		join tbl_ofertas_tbl_sucursales os on o.id=os.tbl_oferta_id
+		join tbl_sucursales s on os.tbl_sucursale_id=s.id
+		join tbl_empresas e on s.tbl_empresa_id=e.id
 		where o.estado_activa=1 
 		order by o.id desc 
 		limit 15 offset 0";
