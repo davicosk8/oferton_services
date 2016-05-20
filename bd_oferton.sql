@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2016 a las 23:39:18
+-- Tiempo de generación: 20-05-2016 a las 22:34:09
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -74,6 +74,14 @@ CREATE TABLE `tbl_imageofertas` (
   `descripcion_imagen` varchar(200) NOT NULL,
   `tbl_oferta_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii;
+
+--
+-- Volcado de datos para la tabla `tbl_imageofertas`
+--
+
+INSERT INTO `tbl_imageofertas` (`id`, `dir`, `descripcion_imagen`, `tbl_oferta_id`) VALUES
+(1, 'foto.jpg', 'una fotito normal', 3),
+(2, 'acdc.jpg', 'logotipo de acdc', 3);
 
 -- --------------------------------------------------------
 
@@ -152,8 +160,8 @@ CREATE TABLE `tbl_sucursales` (
 --
 
 INSERT INTO `tbl_sucursales` (`id`, `nombre`, `direccion`, `telefono1`, `telefono2`, `posX`, `posY`, `fecha_creacion`, `estado_activa`, `tbl_empresa_id`) VALUES
-(1, '1er Anillo', '1er Anillo y Santos Dumont', 3264578, 3215478, 0, 0, '2016-05-19', 1, 1),
-(2, 'La barranca', '2do Anillo a 3 cuadras de los Bomberos', 7849865, 3562145, 0, 0, '2016-05-28', 1, 1);
+(1, '1er Anillo', '1er Anillo y Santos Dumont', 3264578, 3215478, -17.7997, -63.1802, '2016-05-19', 1, 1),
+(2, 'La barranca', '2do Anillo a 3 cuadras de los Bomberos', 7849865, 3562145, -17.8008, -63.1751, '2016-05-28', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -218,7 +226,7 @@ ALTER TABLE `tbl_empresas`
 -- AUTO_INCREMENT de la tabla `tbl_imageofertas`
 --
 ALTER TABLE `tbl_imageofertas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbl_ofertas`
 --
