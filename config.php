@@ -1,8 +1,8 @@
 <?php
 	
-	$dbhost = 'localhost';
-	$dbuser = 'root';
-	$dbpass = '';
-	$dbname = 'bd_oferton';
+	$dbhost = 'sql3.freemysqlhosting.net';
+	$dbuser = 'sql3120768';
+	$dbpass = 'BYZRi79N35';
+	$dbname = 'sql3120768';
 
 ?>

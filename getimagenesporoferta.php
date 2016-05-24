@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 include 'config.php';
 $sql = "select
 			i.dir as imagendir,
